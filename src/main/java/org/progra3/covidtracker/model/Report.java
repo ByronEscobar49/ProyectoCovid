@@ -2,10 +2,13 @@ package org.progra3.covidtracker.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.progra3.covidtracker.model.dto.ReportDTO;
 
 @Entity
 @Data
 public class Report {
+    @Transient
+    private ReportDTO[] data;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
