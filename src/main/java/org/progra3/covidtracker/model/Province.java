@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Province {
     @Id
+
+
+
     private String code;
     private String name;
     private String regionIso;
