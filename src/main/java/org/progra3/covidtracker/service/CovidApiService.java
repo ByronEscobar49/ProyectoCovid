@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.progra3.covidtracker.model.Province;
 import org.progra3.covidtracker.model.Region;
 import org.progra3.covidtracker.model.Report;
-import org.progra3.covidtracker.model.dto.RegionDTO;
-import org.progra3.covidtracker.model.dto.ProvinceDTO;
-import org.progra3.covidtracker.model.dto.ReportDTO;
+import org.progra3.covidtracker.dto.RegionDTO;
+import org.progra3.covidtracker.dto.ProvinceDTO;
+import org.progra3.covidtracker.dto.ReportDTO;
 import org.progra3.covidtracker.repository.ProvinceRepository;
 import org.progra3.covidtracker.repository.RegionRepository;
 import org.progra3.covidtracker.repository.ReportRepository;
@@ -26,14 +26,14 @@ public class CovidApiService {
 
     private static final Logger logger = LoggerFactory.getLogger(CovidApiService.class);
 
-    private final RestTemplate restTemplate;
+    private static RestTemplate restTemplate = null;
     private final RegionRepository regionRepository;
     private final ProvinceRepository provinceRepository;
     private final ReportRepository reportRepository;
 
-    private final String BASE_URL = "https://covid-19-statistics.p.rapidapi.com";
-    private final String API_KEY = "2505eda46amshc60713983b5e807p1da25ajsn36febcbf4a71";
-    private final String API_HOST = "covid-19-statistics.p.rapidapi.com";
+    private static final String BASE_URL = "https://covid-19-statistics.p.rapidapi.com";
+    private static final String API_KEY = "2505eda46amshc60713983b5e807p1da25ajsn36febcbf4a71";
+    private static final String API_HOST = "covid-19-statistics.p.rapidapi.com";
 
     public CovidApiService(RestTemplate restTemplate,
                            RegionRepository regionRepository,
@@ -74,7 +74,7 @@ public class CovidApiService {
         }
     }
 
-    private RegionDTO fetchRegions() {
+    public static RegionDTO fetchRegions() {
         HttpHeaders headers = createHeaders();
         String url = BASE_URL + "/regions";
 
@@ -87,7 +87,7 @@ public class CovidApiService {
         return response.getBody();
     }
 
-    private ProvinceDTO fetchProvinces(String iso) {
+    public ProvinceDTO fetchProvinces(String iso) {
         HttpHeaders headers = createHeaders();
         String url = String.format("%s/provinces?iso=%s", BASE_URL, iso);
 
@@ -100,7 +100,7 @@ public class CovidApiService {
         return response.getBody();
     }
 
-    private ReportDTO fetchReports(String iso, String date) {
+    public ReportDTO fetchReports(String iso, String date) {
         HttpHeaders headers = createHeaders();
         headers.set("X-RapidAPI-Region", "us-east-1");
 
@@ -115,7 +115,7 @@ public class CovidApiService {
         return response.getBody();
     }
 
-    private HttpHeaders createHeaders() {
+    private static HttpHeaders createHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-RapidAPI-Key", API_KEY);
         headers.set("X-RapidAPI-Host", API_HOST);
@@ -128,9 +128,10 @@ public class CovidApiService {
     private RegionRepository RegionRepository;
 
     public void saveRegions(List<Region> regions) {
-        RegionRepository.saveAll(regions);
 
     }
 
+    public void fetchCovidData() {
     }
+}
 

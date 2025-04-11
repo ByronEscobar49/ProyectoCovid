@@ -2,13 +2,11 @@ package org.progra3.covidtracker.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.progra3.covidtracker.model.dto.ReportDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package org.progra3.covidtracker.model.dto;
+package org.progra3.covidtracker.dto;
 
 import lombok.Data;
 import lombok.Getter;

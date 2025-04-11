@@ -2,7 +2,7 @@ package org.progra3.covidtracker.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.progra3.covidtracker.model.dto.RegionDTO;
+import org.progra3.covidtracker.dto.RegionDTO;
 
 import java.util.List;
 
@@ -21,5 +21,6 @@ public class Region {
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<Province> provinces;
+
 }
 
