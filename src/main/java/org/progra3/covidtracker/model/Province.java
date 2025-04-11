@@ -2,21 +2,16 @@ package org.progra3.covidtracker.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.progra3.covidtracker.model.dto.ProvinceDTO;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "provinces")
 public class Province {
     @Id
-
-
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String code;
     private String name;
     private String regionIso;

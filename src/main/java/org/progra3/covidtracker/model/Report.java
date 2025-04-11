@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "reports")
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,10 @@ public class Report {
     private Integer active;
     private Double fatalityRate;
 
+    @ManyToOne
+    @JoinColumn(name = "province_id")
+    private Province province;
+
     public Report(String regionIso, String provinceCode, LocalDate date,
                   Integer confirmed, Integer deaths, Integer recovered,
                   Integer active, Double fatalityRate) {
@@ -39,5 +44,6 @@ public class Report {
         this.recovered = recovered;
         this.active = active;
         this.fatalityRate = fatalityRate;
+
     }
 }
