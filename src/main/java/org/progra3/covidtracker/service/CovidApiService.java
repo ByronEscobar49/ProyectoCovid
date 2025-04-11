@@ -1,5 +1,6 @@
 package org.progra3.covidtracker.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.progra3.covidtracker.model.Province;
 import org.progra3.covidtracker.model.Region;
 import org.progra3.covidtracker.model.Report;
@@ -10,6 +11,7 @@ import org.progra3.covidtracker.repository.ProvinceRepository;
 import org.progra3.covidtracker.repository.RegionRepository;
 import org.progra3.covidtracker.repository.ReportRepository;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,9 +19,10 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
-
+@Slf4j
 @Service
 public class CovidApiService {
+
 
     private static final Logger logger = LoggerFactory.getLogger(CovidApiService.class);
 
@@ -29,7 +32,7 @@ public class CovidApiService {
     private final ReportRepository reportRepository;
 
     private final String BASE_URL = "https://covid-19-statistics.p.rapidapi.com";
-    private final String API_KEY = "tu-api-key-real"; // ⚠️ Reemplaza por tu API key
+    private final String API_KEY = "2505eda46amshc60713983b5e807p1da25ajsn36febcbf4a71";
     private final String API_HOST = "covid-19-statistics.p.rapidapi.com";
 
     public CovidApiService(RestTemplate restTemplate,
@@ -118,4 +121,16 @@ public class CovidApiService {
         headers.set("X-RapidAPI-Host", API_HOST);
         return headers;
     }
-}
+
+    public void fetchData() {
+    }
+    @Autowired
+    private RegionRepository RegionRepository;
+
+    public void saveRegions(List<Region> regions) {
+        RegionRepository.saveAll(regions);
+
+    }
+
+    }
+
