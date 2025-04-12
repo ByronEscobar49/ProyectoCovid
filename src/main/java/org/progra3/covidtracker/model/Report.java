@@ -1,47 +1,67 @@
 package org.progra3.covidtracker.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
 @Entity
-@NoArgsConstructor
-@Table(name = "reports")
+
 public class Report {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String regionIso;
-    private String provinceCode;
+
     private LocalDate date;
-    private Integer confirmed;
-    private Integer deaths;
-    private Integer recovered;
-    private Integer active;
-    private Double fatalityRate;
+    private int confirmed;
+    private int deaths;
+    private int recovered;
 
     @ManyToOne
     @JoinColumn(name = "province_id")
     private Province province;
 
-    public Report(String regionIso, String provinceCode, LocalDate date,
-                  Integer confirmed, Integer deaths, Integer recovered,
-                  Integer active, Double fatalityRate) {
-        this.regionIso = regionIso;
-        this.provinceCode = provinceCode;
-        this.date = date;
-        this.confirmed = confirmed;
-        this.deaths = deaths;
-        this.recovered = recovered;
-        this.active = active;
-        this.fatalityRate = fatalityRate;
-
+    // Getters y Setters
+    public Long getId() {
+        return id;
     }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public LocalDate getDate() {
+        return date;
+    }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    public int getConfirmed() {
+        return confirmed;
+    }
+    public void setConfirmed(int confirmed) {
+        this.confirmed = confirmed;
+    }
+    public int getDeaths() {
+        return deaths;
+    }
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    public int getRecovered() {
+        return recovered;
+    }
+
+    public void setRecovered(int recovered) {
+        this.recovered = recovered;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+
+
 }
